@@ -1,3 +1,4 @@
+// Used for checking excessive operators being displayed
 let hasOp = false;
 let hasNegative = false;
 
@@ -9,8 +10,18 @@ buttons.forEach(button => button.addEventListener('click', display));
 const equals = document.querySelector('#equals');
 equals.addEventListener('click', operate);
 
+//Backspace button
+const ce = document.querySelector('.back');
+ce.addEventListener('click', backspace);
+
+const clear = document.querySelector('.clear');
+clear.addEventListener('click', clearDisplay);
+
 function divide(num1, num2){
-    if(num2 == 0) return;
+    if(num2 == 0) {
+        alert('Nice Try!');
+        return;
+    } 
 
     return num1 / num2;
 } 
@@ -54,6 +65,7 @@ function display(e){
         } else if (hasNegative){
             alert('A digit must follow a negative sign!');
         } else {
+            // Replace current operator with a new one
             displayer.textContent = displayer.textContent.slice(0, displayer.textContent.length - 2);
             displayer.textContent += ` ${e.target.textContent} `;
         }
@@ -65,4 +77,12 @@ function display(e){
         hasOp = false;
         hasNegative = false;
     }
+}
+
+function backspace(){
+    displayer.textContent = displayer.textContent.slice(0, displayer.textContent.length - 1);
+}
+
+function clearDisplay(){
+    displayer.textContent = '';
 }
