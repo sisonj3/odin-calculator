@@ -7,7 +7,7 @@ const displayer = document.querySelector('.display');
 const buttons = Array.from(document.querySelectorAll('.toDisplay'));
 buttons.forEach(button => button.addEventListener('click', display));
 
-const equals = document.querySelector('#equals');
+const equals = document.querySelector('.equals');
 equals.addEventListener('click', operate);
 
 //Backspace button
