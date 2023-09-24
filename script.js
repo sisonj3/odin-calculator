@@ -1,4 +1,5 @@
 let hasOp = false;
+let hasNegative = false;
 
 const displayer = document.querySelector('.display');
 
@@ -12,7 +13,7 @@ function divide(num1, num2){
     if(num2 == 0) return;
 
     return num1 / num2;
-}
+} 
 
 function operate(){
     let equation = displayer.textContent.split(' ');
@@ -45,9 +46,23 @@ function operate(){
 }
 
 function display(e){
-    if(isNaN(e.target.textContent)){
+    if(isNaN(e.target.textContent) && hasOp){
+        // Allow one minus for negative sign
+        if(e.target.textContent == '-' && !hasNegative){
+            displayer.textContent += ` ${e.target.textContent} `;
+            hasNegative = true;
+        } else if (hasNegative){
+            alert('A digit must follow a negative sign!');
+        } else {
+            displayer.textContent = displayer.textContent.slice(0, displayer.textContent.length - 2);
+            displayer.textContent += ` ${e.target.textContent} `;
+        }
+    } else if(isNaN(e.target.textContent)){
         displayer.textContent += ` ${e.target.textContent} `;
+        hasOp = true;
     } else {
         displayer.textContent += e.target.textContent;
+        hasOp = false;
+        hasNegative = false;
     }
 }
